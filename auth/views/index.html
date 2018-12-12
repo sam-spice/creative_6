@@ -1,34 +1,47 @@
 <!doctype html>
-<html ng-app="myApp"> 
-    
+<html ng-app="myApp">
+
 <head>
     <title>User Login and Sessions</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
     <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+    <script src="/javascripts/my_app.js"></script>
 </head>
-        
-<body>  
+
+<body>
     <div ng-controller="myController">
         <h2 id="welcomeText">Welcome. You are Logged In as
             <%= username %>
         </h2>
         <a id="logoutLink" href="/logout">logout</a>
-        <a id="editLink" href="/user">Edit User</a>
-        <p>Place Your Code Here
-            <p>
+        <hr>
+        <form method="POST" action="/user/journal" class='form-signin'>
+            <div class='form-group'>
+                <input type="text" name="title" placeholder="Your Title Here!" class='input-block-level'>
+                <textarea name="journal" rows="10" cols="75" placeholder="Your Journal Entry Here" class='input-block-level'></textarea>
+                <br>
+                <input type="submit">
+            </div>
+        </form>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
+        </div>
+        <div ng-repeat="journal in journals | orderBy: '-date'" class="product_listing">
+            Journal Title: {{journal.title}} Date Submitted: {{journal.date | date:'short'}}
+            <button ng-click='showJournal(journal)'>View Journal Contents</button>
+            <hr>
+        </div>
     </div>
-    <hr>
-    <span id="indexMsg">
-        <%= msg %>
-    </span>
-    <hr>
-    <span id="colorText">
-    Color
-        <%= color %>
-      </span>
-    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
-    <script src="/javascripts/my_app.js"></script>
+
+
 </body>
-      
+
 </html>

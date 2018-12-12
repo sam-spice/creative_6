@@ -52,7 +52,9 @@ router.post('/signup', users.signup);
 router.post('/user/update', users.updateUser);
 router.post('/user/delete', users.deleteUser);
 router.post('/login', users.login);
+router.post('/user/journal', users.postEntry);
 router.get('/user/profile', users.getUserProfile);
+router.get('/user/journal', users.getEntries);
 
 
 module.exports = router;
